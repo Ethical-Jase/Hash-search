@@ -1,0 +1,29 @@
+import re
+
+def find_hash(hash_value, file_path):
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()
+            # Adjust the regular expression based on the format of your hash
+            hash_pattern = re.compile(r'\b' + re.escape(hash_value) + r'\b')
+            matches = re.findall(hash_pattern, content)
+            
+            if matches:
+                print(f"Hash '{hash_value}' found in {file_path}")
+                print("Matches:")
+                for match in matches:
+                    print(match)
+            else:
+                print(f"Hash '{hash_value}' not found in {file_path}")
+
+    except FileNotFoundError:
+        print(f"Error: File '{file_path}' not found.")
+
+if __name__ == "__main__":
+    # Replace 'hash_to_find' with the specific hash you are looking for
+    hash_to_find = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+
+    # Replace 'log_file_path' with the path to your text file containing the log data
+    log_file_path = 'Test_sha_256_search.txt'
+
+    find_hash(hash_to_find, log_file_path)
